@@ -33,7 +33,7 @@ def post_list(request):
     serializer = PostSerializer(data=request.data)
 
     if serializer.is_valid():
-        serializer.save(author=request.user.username)
+        serializer.save(author=request.user)
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED
@@ -72,7 +72,6 @@ def comment_list(request, post_id):
 
     data = request.data.copy()
     data['post'] = post_id
-    data['author'] = request.user.username
 
     # Require either text or a video
     if not data.get('content') and not data.get('video'):
@@ -84,7 +83,7 @@ def comment_list(request, post_id):
     serializer = CommentSerializer(data=data)
 
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(author=request.user)
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED
@@ -108,20 +107,16 @@ def like_list(request, post_id):
         )
 
     # Identify the logged-in user
-    author = (
-        request.user.username
-        if request.user.is_authenticated
-        else None
-    )
+    user = request.user if request.user.is_authenticated else None
 
     if request.method == 'GET':
         likes_count = Like.objects.filter(post=post).count()
 
         liked = False
-        if author:
+        if user:
             liked = Like.objects.filter(
                 post=post,
-                author=author
+                author=user
             ).exists()
 
         return Response({
@@ -130,7 +125,7 @@ def like_list(request, post_id):
         })
 
     # Only logged-in users can like posts
-    if not author:
+    if not user:
         return Response(
             {'error': 'Please log in to like a post.'},
             status=status.HTTP_401_UNAUTHORIZED
@@ -138,7 +133,7 @@ def like_list(request, post_id):
 
     like, created = Like.objects.get_or_create(
         post=post,
-        author=author
+        author=user
     )
 
     if created:
@@ -172,7 +167,7 @@ def delete_post(request, post_id):
         )
 
     # Check the actual authenticated user
-    if request.user.username != post.author:
+    if post.author != request.user:
         return Response(
             {'error': 'You cannot delete this post.'},
             status=status.HTTP_403_FORBIDDEN
@@ -208,7 +203,7 @@ def delete_comment(request, post_id, comment_id):
         )
 
     # Check the actual logged-in user
-    if request.user.username != comment.author:
+    if comment.author != request.user:
         return Response(
             {'error': 'You cannot delete this comment.'},
             status=status.HTTP_403_FORBIDDEN
