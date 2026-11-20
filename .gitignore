@@ -20,5 +20,7 @@ db.sqlite3-journal
 .idea/
 .vscode/
 
-# Agent skills (installed locally, not part of the project)
+# Agent skills / tooling (installed locally, not part of the project)
 .agents/
+.claude/
+skills-lock.json
