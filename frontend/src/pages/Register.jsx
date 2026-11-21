@@ -62,7 +62,7 @@ function Register() {
     <div className="auth-page">
       <div className="auth-card">
         <img src="/logo.png" alt="UNMUTE" className="auth-logo" />
-        <h1>Join UNMUTE 💜</h1>
+        <h1>Join UNMUTE</h1>
         <p>Create your account and start your learning journey.</p>
 
         {error && <p className="auth-error">{error}</p>}
