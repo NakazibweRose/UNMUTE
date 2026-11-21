@@ -4,10 +4,13 @@ import {
   Clock,
   Flame,
   GraduationCap,
+  Hand,
+  Handshake,
   Heart,
   MessageCircle,
   Play,
   Search,
+  Stethoscope,
   Users,
   LogOut,
 } from 'lucide-react'
@@ -20,42 +23,42 @@ const categories = [
   {
     title: 'Greetings & Introductions',
     description: 'Learn how to greet people and introduce yourself.',
-    icon: '👋',
+    icon: Hand,
     lessons: 8,
     lessonId: 'greetings',
   },
   {
     title: 'Family & Relationships',
     description: 'Talk about family members and relationships.',
-    icon: '👨‍👩‍👧',
+    icon: Users,
     lessons: 10,
     lessonId: 'family',
   },
   {
     title: 'School & Education',
     description: 'Build communication skills for learning environments.',
-    icon: '📚',
+    icon: GraduationCap,
     lessons: 9,
     lessonId: 'school',
   },
   {
     title: 'Everyday Communication',
     description: 'Practise useful signs for everyday situations.',
-    icon: '💬',
+    icon: MessageCircle,
     lessons: 12,
     lessonId: 'everyday',
   },
   {
     title: 'Healthcare',
     description: 'Learn signs for common healthcare conversations.',
-    icon: '🏥',
+    icon: Stethoscope,
     lessons: 7,
     lessonId: 'healthcare',
   },
   {
     title: 'Community & Social Interaction',
     description: 'Communicate confidently in your community.',
-    icon: '🤝',
+    icon: Handshake,
     lessons: 8,
     lessonId: 'community',
   },
@@ -125,14 +128,14 @@ function Dashboard() {
         <div className="dashboard-welcome">
           <div>
             <span className="section-label">YOUR LEARNING SPACE</span>
-            <h1>Welcome back, {username}! 👋</h1>
+            <h1>Welcome back, {username}!</h1>
             <p>
               Your journey towards better communication starts here.
             </p>
           </div>
 
           <span className="language-select">
-            🌐 English
+            English
           </span>
         </div>
 
@@ -150,7 +153,7 @@ function Dashboard() {
             </p>
 
             <div className="video-guide-language">
-              🤟 Ugandan Sign Language
+              Ugandan Sign Language
             </div>
           </div>
 
@@ -225,7 +228,7 @@ function Dashboard() {
             </button>
           </div>
 
-          <div className="continue-art">🤟</div>
+          <div className="continue-art"><Hand size={78} strokeWidth={1.2} /></div>
         </section>
 
         {/* Learning Categories */}
@@ -256,31 +259,34 @@ function Dashboard() {
           </div>
 
           <div className="category-grid">
-            {filteredCategories.map((category) => (
-              <article
-                className="category-card"
-                key={category.lessonId}
-                onClick={() => navigate(`/lesson/${category.lessonId}`)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    navigate(`/lesson/${category.lessonId}`)
-                  }
-                }}
-              >
-                <div className="category-emoji">
-                  {category.icon}
-                </div>
+            {filteredCategories.map((category) => {
+              const Icon = category.icon
+              return (
+                <article
+                  className="category-card"
+                  key={category.lessonId}
+                  onClick={() => navigate(`/lesson/${category.lessonId}`)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      navigate(`/lesson/${category.lessonId}`)
+                    }
+                  }}
+                >
+                  <div className="category-emoji">
+                    <Icon size={28} />
+                  </div>
 
-                <h3>{category.title}</h3>
+                  <h3>{category.title}</h3>
 
-                <p>{category.description}</p>
+                  <p>{category.description}</p>
 
-                <span>{category.lessons} lessons</span>
-              </article>
-            ))}
+                  <span>{category.lessons} lessons</span>
+                </article>
+              )
+            })}
           </div>
 
           {filteredCategories.length === 0 && (

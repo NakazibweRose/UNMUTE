@@ -975,7 +975,7 @@ const handleDeletePost = async (postId) => {
         <div className="community-welcome">
           <span className="section-label">GROW TOGETHER</span>
 
-          <h1>Welcome to the UNMUTE Community 💜</h1>
+          <h1>Welcome to the UNMUTE Community</h1>
 
           <p>
             A space to share experiences, ask questions,
