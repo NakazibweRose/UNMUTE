@@ -543,7 +543,11 @@ function Community() {
           throw new Error('Could not load community posts.')
         }
 
-        const data = await response.json()
+        const payload = await response.json()
+
+        // The posts endpoint is paginated: { count, next, previous, results }.
+        // Fall back to a bare array for backward compatibility.
+        const data = Array.isArray(payload) ? payload : payload.results ?? []
 
         setPosts(data.map(formatPost))
 
@@ -664,9 +668,15 @@ const handlePost = async () => {
   JSON.stringify(errorData, null, 2)
 )
 
-      throw new Error(
-        errorData.error || 'Your post could not be saved.'
-      )
+      // DRF returns field errors like { video: ["File too large..."] };
+      // surface the first one instead of a generic message.
+      const firstError =
+        errorData.error ||
+        (errorData && typeof errorData === 'object'
+          ? Object.values(errorData).flat()[0]
+          : null)
+
+      throw new Error(firstError || 'Your post could not be saved.')
     }
 
     const savedPost = await response.json()
