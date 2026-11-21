@@ -65,6 +65,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,6 +104,14 @@ DATABASES = {
     }
 }
 
+# In production, DATABASE_URL (e.g. Render Postgres) overrides the sqlite default.
+_database_url = os.environ.get('DATABASE_URL')
+if _database_url:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.parse(
+        _database_url, conn_max_age=600, ssl_require=True
+    )
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -139,6 +148,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
+
+# Render (and most PaaS) terminate TLS at a proxy; trust its forwarded scheme.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Email
@@ -155,6 +176,19 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+# Admin/CSRF over https on the deployed domain(s).
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
+
+# The deployed frontend's origin (Render sets FRONTEND_ORIGIN to its host).
+_frontend_origin = os.environ.get('FRONTEND_ORIGIN')
+if _frontend_origin:
+    _origin = (
+        _frontend_origin if '://' in _frontend_origin
+        else f'https://{_frontend_origin}'
+    )
+    CORS_ALLOWED_ORIGINS.append(_origin)
+    CSRF_TRUSTED_ORIGINS.append(_origin)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

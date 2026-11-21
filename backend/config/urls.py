@@ -16,9 +16,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf import settings
-from django.conf.urls.static import static
+from django.views.static import serve
 from django.http import JsonResponse
 
 
@@ -43,8 +43,13 @@ urlpatterns = [
     path('api/ussd/', include('ussd.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )
+# ponytail: serve uploaded media through Django even in prod. Fine for a demo,
+# but Render's free filesystem is ephemeral so uploads vanish on every redeploy
+# — move media to object storage (S3/Cloudflare R2) before real traffic.
+urlpatterns += [
+    re_path(
+        r'^media/(?P<path>.*)$',
+        serve,
+        {'document_root': settings.MEDIA_ROOT},
+    ),
+]
