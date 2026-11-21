@@ -34,6 +34,7 @@ const lessonContent = {
     demonstration: 'Ugandan Sign Language demonstration',
     placeholder: 'An expert-validated UgSL video demonstration will appear here.',
     videoNote: 'Video lesson coming soon',
+    demoVideo: '/videos/greetings.mp4',
     vocabulary: 'Explore the concepts',
     vocabularyDescription: 'Open each card to learn more about the ideas covered in this lesson.',
     
@@ -117,6 +118,7 @@ cards: [
     demonstration: 'Eky’okulabirako kya Lugha ya Bakiggala eya Uganda',
     placeholder: 'Vidiyo ekakasiddwa omukugu mu Lugha ya Bakiggala eya Uganda ejja kulabikira wano.',
     videoNote: 'Essomo lya vidiyo lijja kubaawo oluvannyuma',
+    demoVideo: '/videos/greetings.mp4',
     vocabulary: 'Tegeera ebigambo bino',
     vocabularyDescription: 'Nyiga ku buli kaadi omanye ebisingawo ku nsonga eziri mu ssomo lino.',
     cards: [
@@ -199,6 +201,7 @@ const familyLessonContent = {
     demonstration: 'Ugandan Sign Language: Family',
     placeholder: 'Watch the family video demonstrations below.',
     videoNote: 'Family video demonstrations',
+    demoVideo: '/videos/lessons/family/family.mp4',
     vocabulary: 'Explore family vocabulary',
     vocabularyDescription: 'Watch both videos and explore the concepts covered in this lesson.',
     cards: [
@@ -249,6 +252,7 @@ const familyLessonContent = {
     demonstration: 'Lugha ya Bakiggala eya Uganda: Amaka',
     placeholder: 'Laba vidiyo ez’obubonero ezikwata ku maka wansi.',
     videoNote: 'Vidiyo ezikwata ku maka',
+    demoVideo: '/videos/lessons/family/family.mp4',
     vocabulary: 'Yiga ebikwata ku maka',
     vocabularyDescription: 'Laba vidiyo zombi era wegezeemu obubonero obulimu.',
     cards: [
@@ -300,6 +304,7 @@ const schoolLessonContent = {
     demonstration: 'Ugandan Sign Language: School & Education',
     placeholder: 'Watch the school demonstrations below.',
     videoNote: 'School video demonstrations',
+    demoVideo: '/videos/lessons/school/kindergaten.mp4',
     vocabulary: 'Explore school vocabulary',
     vocabularyDescription: 'Watch the videos and practise the concepts presented.',
     cards: [
@@ -356,6 +361,7 @@ const schoolLessonContent = {
     demonstration: 'Lugha ya Bakiggala eya Uganda: Essomero',
     placeholder: 'Laba vidiyo ezikwata ku ssomero wansi.',
     videoNote: 'Vidiyo z’essomero',
+    demoVideo: '/videos/lessons/school/kindergaten.mp4',
     vocabulary: 'Yiga ebikwata ku ssomero',
     vocabularyDescription: 'Laba vidiyo era wegezeemu obubonero obulimu.',
     cards: [
@@ -414,6 +420,7 @@ const communityLessonContent = {
     demonstration: 'Ugandan Sign Language: Community',
     placeholder: 'Watch the community video demonstrations below.',
     videoNote: 'Community video demonstrations',
+    demoVideo: '/videos/lessons/community/house.mp4',
     vocabulary: 'Explore community vocabulary',
     vocabularyDescription: 'Watch the videos and practise the concepts presented.',
     cards: [
@@ -464,6 +471,7 @@ const communityLessonContent = {
     demonstration: 'Lugha ya Bakiggala eya Uganda: Ekitundu',
     placeholder: 'Laba vidiyo ezikwata ku kitundu wansi.',
     videoNote: 'Vidiyo ezikwata ku kitundu',
+    demoVideo: '/videos/lessons/community/house.mp4',
     vocabulary: 'Yiga ebikwata ku kitundu',
     vocabularyDescription: 'Laba vidiyo era wegezeemu obubonero obulimu.',
     cards: [
@@ -719,11 +727,25 @@ if (
             <h2>{t.demonstration}</h2>
           </div>
 
-          <div className="lesson-video-placeholder">
-            <PlayCircle size={52} />
-            <h3>{t.videoNote}</h3>
-            <p>{t.placeholder}</p>
-          </div>
+          {t.demoVideo ? (
+            <div className="lesson-concept-video">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                className="concept-video-player"
+              >
+                <source src={t.demoVideo} type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
+            </div>
+          ) : (
+            <div className="lesson-video-placeholder">
+              <PlayCircle size={52} />
+              <h3>{t.videoNote}</h3>
+              <p>{t.placeholder}</p>
+            </div>
+          )}
         </section>
 
         <section className="lesson-card">
