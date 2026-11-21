@@ -180,6 +180,11 @@ CORS_ALLOWED_ORIGINS = [
 # Admin/CSRF over https on the deployed domain(s).
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
+# ponytail: allow any onrender.com subdomain so the frontend works regardless of
+# Render's random URL suffixes (no need to hand-match FRONTEND_ORIGIN). Broad but
+# low-risk for a token-auth app; tighten to the exact origin on a custom domain.
+CORS_ALLOWED_ORIGIN_REGEXES = [r'^https://[a-z0-9-]+\.onrender\.com$']
+
 # The deployed frontend's origin (Render sets FRONTEND_ORIGIN to its host).
 _frontend_origin = os.environ.get('FRONTEND_ORIGIN')
 if _frontend_origin:
