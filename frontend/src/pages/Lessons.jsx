@@ -115,7 +115,7 @@ function Lessons() {
         </Link>
 
         <div>
-          <span>UNMUTE LEARNING ACADEMY</span>
+          <img src="/logo.png" alt="UNMUTE" className="brand-logo lessons-logo" />
           <h1>Explore Sign Language Lessons</h1>
           <p>
             Learn Ugandan Sign Language through visual demonstrations,

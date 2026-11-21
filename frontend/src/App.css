@@ -61,6 +61,17 @@
   display: block;
 }
 
+.auth-logo {
+  display: block;
+  height: 46px;
+  width: auto;
+  margin: 0 auto 18px;
+}
+
+.lessons-logo {
+  margin-bottom: 14px;
+}
+
 .unmute-nav {
   display: flex;
   align-items: center;
