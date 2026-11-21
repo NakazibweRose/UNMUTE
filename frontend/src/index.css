@@ -1,10 +1,42 @@
 @import "tailwindcss";
 
+:root {
+  /* One type family for the whole app. Falls back to system sans while the
+     webfont loads (font-display: swap on the <link>). */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
+  --focus-ring: #6545a8;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Visible keyboard focus. This is an accessibility-first product and the
+   original CSS had no focus styles (several inputs even set outline:none),
+   which locks out keyboard and switch users. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Honour reduced-motion: the pages use many hover/translate transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

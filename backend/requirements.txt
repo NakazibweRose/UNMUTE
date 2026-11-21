@@ -1,0 +1,9 @@
+Django>=6.1,<6.2
+djangorestframework>=3.16,<4
+django-cors-headers>=4.9,<5
+
+# Production (Render)
+gunicorn>=23,<24
+whitenoise>=6.8,<7
+dj-database-url>=2.3,<3
+psycopg[binary]>=3.2,<4

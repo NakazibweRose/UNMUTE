@@ -13,7 +13,7 @@
   --muted: #777184;
 
   color: var(--text);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   background: #fff;
 }
 
@@ -245,6 +245,16 @@
   background: linear-gradient(145deg, #f5f0fc, #e9e1f7);
   border-radius: 18px;
   margin: 24px 0 19px;
+}
+
+.hero-demo-video {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  margin: 24px 0 19px;
+  border-radius: 18px;
+  background: #211c32;
+  object-fit: contain;
 }
 
 .visual-caption {

@@ -133,9 +133,18 @@ function App() {
               {isEnglish ? 'LEARN TOGETHER' : 'YIGIRA WAMU'}
             </div>
 
-            <div className="hand-illustration">
-              <Hand size={112} strokeWidth={1.3} />
-            </div>
+            <video
+              className="hero-demo-video"
+              src="/videos/unmute-demo.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              aria-label={
+                isEnglish
+                  ? 'Demo video showing how UNMUTE works'
+                  : 'Vidiyo eraga engeri UNMUTE gy’ekola'
+              }
+            />
 
             <div className="visual-caption">
               <span className="caption-label">
