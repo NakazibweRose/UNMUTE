@@ -19,8 +19,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
+
+
+def api_root(request):
+    return JsonResponse({
+        'service': 'UNMUTE backend',
+        'endpoints': {
+            'posts': '/api/community/posts/',
+            'register': '/api/accounts/register/',
+            'login': '/api/accounts/login/',
+            'ussd_callback': '/api/ussd/callback/',
+            'admin': '/admin/',
+        },
+    })
+
 
 urlpatterns = [
+    path('', api_root),
     path('admin/', admin.site.urls),
     path('api/community/', include('community.urls')),
     path('api/accounts/', include('accounts.urls')),
