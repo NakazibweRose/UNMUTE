@@ -59,6 +59,7 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <img src="/logo.png" alt="UNMUTE" className="auth-logo" />
         <h1>Welcome Back 💜</h1>
         <p>Log in to continue your UNMUTE journey.</p>
 

@@ -1,0 +1,6 @@
+# Phase-1 sign recognizer. numpy is enough to run selfcheck.py and to
+# train/predict from a saved model.npz; the two below are only needed to
+# extract landmarks from real video clips.
+numpy>=1.24
+opencv-python>=4.8
+mediapipe>=0.10
