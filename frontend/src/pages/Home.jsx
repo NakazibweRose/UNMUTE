@@ -115,15 +115,6 @@ function App() {
               {isEnglish ? 'Explore UNMUTE' : 'Laba UNMUTE'}
             </Link>
           </div>
-
-          <div className="hero-note">
-            <Users size={18} />
-            <span>
-              {isEnglish
-                ? 'Designed for everyone. Built for connection.'
-                : 'Yakolebwa ku lwa buli muntu.'}
-            </span>
-          </div>
         </div>
 
         <div className="hero-visual">
@@ -154,18 +145,6 @@ function App() {
                 {isEnglish ? 'Learn Ugandan Sign Language' : 'Yiga Olulimi lw’Obubonero'}
               </strong>
             </div>
-          </div>
-
-          <div className="floating-card floating-card-top">
-            <Globe2 size={20} />
-            <span>English + Luganda</span>
-          </div>
-
-          <div className="floating-card floating-card-bottom">
-            <MessageCircle size={20} />
-            <span>
-              {isEnglish ? 'Everyone belongs here' : 'Buli muntu wa mugaso'}
-            </span>
           </div>
         </div>
       </section>
