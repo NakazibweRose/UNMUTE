@@ -1367,6 +1367,16 @@
   text-align: center;
 }
 
+.video-guide-video {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  max-height: 340px;
+  border-radius: 16px;
+  background: #1f262c;
+  object-fit: contain;
+}
+
 .video-guide-play {
   width: 65px;
   height: 65px;

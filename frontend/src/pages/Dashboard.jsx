@@ -158,17 +158,14 @@ function Dashboard() {
           </div>
 
           <div className="video-guide-preview">
-            <div className="video-guide-placeholder">
-              <div className="video-guide-play">
-                <Play size={30} fill="currentColor" />
-              </div>
-
-              <span>UNMUTE introduction video coming soon</span>
-
-              <small>
-                Sign-language demonstration
-              </small>
-            </div>
+            <video
+              className="video-guide-video"
+              src="/videos/unmute-demo.mp4"
+              controls
+              playsInline
+              preload="metadata"
+              aria-label="UNMUTE introduction video — sign-language demonstration"
+            />
           </div>
         </section>
 
