@@ -32,6 +32,7 @@ const phrases = [
     english: 'Hello, how are you?',
     luganda: 'Oli otya?',
     description: 'A friendly greeting to start a conversation.',
+    video: '/videos/lessons/greetings/hello.mp4',
   },
   {
     id: 2,
@@ -39,6 +40,7 @@ const phrases = [
     english: 'My name is...',
     luganda: 'Erinnya lyange...',
     description: 'Introduce yourself to someone.',
+    video: '/videos/introduction.mp4',
   },
   {
     id: 3,
@@ -46,6 +48,7 @@ const phrases = [
     english: 'Thank you',
     luganda: 'Webale',
     description: 'Express gratitude.',
+    video: '/videos/lessons/greetings/thank-you.mp4',
   },
   {
     id: 4,
@@ -53,6 +56,7 @@ const phrases = [
     english: 'Please help me',
     luganda: 'Nsaba onnyambe',
     description: 'Ask someone for assistance.',
+    video: '/videos/lessons/greetings/good-morning.mp4',
   },
   {
     id: 5,
@@ -60,6 +64,7 @@ const phrases = [
     english: 'I do not understand',
     luganda: 'Sitegeera',
     description: 'Let someone know you need clarification.',
+    video: '/videos/conversation.mp4',
   },
   {
     id: 6,
@@ -67,6 +72,7 @@ const phrases = [
     english: 'I need a doctor',
     luganda: 'Nneetaaga omusawo',
     description: 'Communicate a medical need.',
+    video: '/videos/lessons/school/student.mp4',
   },
   {
     id: 7,
@@ -74,6 +80,7 @@ const phrases = [
     english: 'I am in pain',
     luganda: 'Nnumwa',
     description: 'Explain that you are experiencing pain.',
+    video: '/videos/lessons/family/family2.mp4',
   },
   {
     id: 8,
@@ -81,6 +88,7 @@ const phrases = [
     english: 'How much does this cost?',
     luganda: 'Kino kya ssente mmeka?',
     description: 'Ask for the price of an item.',
+    video: '/videos/lessons/community/store.mp4',
   },
   {
     id: 9,
@@ -88,6 +96,7 @@ const phrases = [
     english: 'I would like to buy this',
     luganda: 'Njagala okugula kino',
     description: 'Tell a seller you want to purchase something.',
+    video: '/videos/lessons/community/house.mp4',
   },
   {
     id: 10,
@@ -95,6 +104,7 @@ const phrases = [
     english: 'I need help with this lesson',
     luganda: 'Nneetaaga obuyambi ku ssomo lino',
     description: 'Ask a teacher or classmate for help.',
+    video: '/videos/lessons/school/kindergaten.mp4',
   },
   {
     id: 11,
@@ -102,6 +112,7 @@ const phrases = [
     english: 'Please repeat',
     luganda: 'Nsaba oddemu',
     description: 'Ask someone to repeat what they said.',
+    video: '/videos/lessons/greetings/goodbye.mp4',
   },
   {
     id: 12,
@@ -109,6 +120,7 @@ const phrases = [
     english: 'Please write it down',
     luganda: 'Nsaba kiwandiike',
     description: 'Request written communication.',
+    video: '/videos/lessons/family/family.mp4',
   },
 ]
 
@@ -353,18 +365,32 @@ function Communication() {
 
             <p>{selectedPhrase.description}</p>
 
-            <div className="communication-sign-placeholder">
-              <HandHelping size={40} />
+            {selectedPhrase.video ? (
+              <div className="lesson-concept-video">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="concept-video-player"
+                >
+                  <source src={selectedPhrase.video} type="video/mp4" />
+                  Your browser does not support video playback.
+                </video>
+              </div>
+            ) : (
+              <div className="communication-sign-placeholder">
+                <HandHelping size={40} />
 
-              <h3>Sign demonstration</h3>
+                <h3>Sign demonstration</h3>
 
-              <p>
-                An authentic Ugandan Sign Language demonstration
-                will be available here.
-              </p>
+                <p>
+                  An authentic Ugandan Sign Language demonstration
+                  will be available here.
+                </p>
 
-              <span>Video coming soon</span>
-            </div>
+                <span>Video coming soon</span>
+              </div>
+            )}
 
             <button
               className="communication-modal-button"
