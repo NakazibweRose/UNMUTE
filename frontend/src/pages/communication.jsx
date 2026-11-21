@@ -138,10 +138,7 @@ function Communication() {
 
       <header className="communication-header">
         <div className="communication-logo">
-          <span className="communication-logo-icon">
-            <MessageCircle size={22} />
-          </span>
-          <span>UNMUTE</span>
+          <img src="/logo.png" alt="UNMUTE" className="brand-logo" />
         </div>
 
         <nav className="communication-nav">

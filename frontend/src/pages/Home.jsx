@@ -27,11 +27,8 @@ function App() {
   return (
     <main className="unmute-app">
       <header className="unmute-header">
-        <Link to="/" className="unmute-logo">
-          <span className="logo-icon">
-            <Hand size={24} />
-          </span>
-          <span>UNMUTE<span className="logo-dot">.</span></span>
+        <Link to="/" className="unmute-logo" aria-label="UNMUTE home">
+          <img src="/logo.png" alt="UNMUTE" className="brand-logo" />
         </Link>
 
         <nav className="unmute-nav">
@@ -218,11 +215,8 @@ function App() {
       </section>
 
       <footer className="unmute-footer">
-        <Link to="/" className="unmute-logo">
-          <span className="logo-icon">
-            <Hand size={21} />
-          </span>
-          <span>UNMUTE<span className="logo-dot">.</span></span>
+        <Link to="/" className="unmute-logo" aria-label="UNMUTE home">
+          <img src="/logo.png" alt="UNMUTE" className="brand-logo" />
         </Link>
         <p>Every voice. Every sign. Every story.</p>
       </footer>

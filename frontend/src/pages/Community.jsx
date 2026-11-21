@@ -950,14 +950,8 @@ const handleDeletePost = async (postId) => {
   return (
     <main className="community-page">
       <header className="community-header">
-        <a href="/" className="unmute-logo">
-          <span className="logo-icon">
-            <Hand size={23} />
-          </span>
-
-          <span>
-            UNMUTE<span className="logo-dot">.</span>
-          </span>
+        <a href="/" className="unmute-logo" aria-label="UNMUTE home">
+          <img src="/logo.png" alt="UNMUTE" className="brand-logo" />
         </a>
 
         <nav>
